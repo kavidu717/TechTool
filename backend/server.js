@@ -32,6 +32,7 @@ app.get('/api/test', async(req, res) => {
 });
 
 
+
 app.use('/api/suppliers', supplierRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
