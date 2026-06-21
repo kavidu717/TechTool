@@ -6,7 +6,7 @@ export const addSale=async(req,res)=>{
     const client=await pool.connect();
     try{
         
-        const {invoice_id,total_amount,discount,items}=req.body;
+        const {invoice_no,total_amount,discount,items}=req.body;
           
         // get the logged cashier id
         const cashier_id=req.user.id;
@@ -15,7 +15,7 @@ export const addSale=async(req,res)=>{
         await client.query("BEGIN");
 
         // insert the items
-        const saleRes=await client.query("INSERT INTO sales(invoice_id,cashier_id,total_amount,discount,sale_date)VALUES($1,$2,$3,$4,NOW()) RETURNING *",[invoice_id,cashier_id,total_amount,discount]
+        const saleRes=await client.query("INSERT INTO sales(invoice_no,cashier_id,total_amount,discount,sale_date)VALUES($1,$2,$3,$4,NOW()) RETURNING *",[invoice_no,cashier_id,total_amount,discount]
 
         );
 
