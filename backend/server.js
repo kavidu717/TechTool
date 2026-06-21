@@ -7,6 +7,7 @@ import supplierRoutes from './src/routes/supplierRoutes.js';
 import productRoutes from './src/routes/productRoutes.js';
 import purchaseRoutes from './src/routes/purchaseRoutes.js';
 import dashboardRoutes from './src/routes/dashboardRoutes.js';
+import saleRoutes from './src/routes/salesRoutes.js';
 
 const app = express();
 
@@ -40,7 +41,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/purchases', purchaseRoutes);
 app.use('/api/dashboard', dashboardRoutes);
-
+app.use('/api/sales', saleRoutes);
 
 
 app.listen(process.env.PORT, () => {
