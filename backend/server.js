@@ -5,6 +5,7 @@ import pool from './src/config/db.js';
 import userRoutes from './src/routes/userRoutes.js';
 import supplierRoutes from './src/routes/supplierRoutes.js';
 import productRoutes from './src/routes/productRoutes.js';
+import purchaseRoutes from './src/routes/purchaseRoutes.js';
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.get('/api/test', async(req, res) => {
 app.use('/api/suppliers', supplierRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/purchases', purchaseRoutes);
 
 
 

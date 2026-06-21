@@ -5,13 +5,13 @@ export const  addPurchase=async(req,res)=>{
     // for the transaction
     const client = await pool.connect();
     try{
-        const {supplier_id,reference_number,total_amount,items}=req.body;
+        const {supplier_id,reference_no,total_amount,items}=req.body;
 
         // start the transaction
         await client.query("BEGIN");
          
         // insert the items
-        const purchaseRes=await client.query("INSERT INTO purchases(supplier_id,reference_number,total_amount,purchased_date)VALUES($1,$2,$3,NOW()) RETURNING *",[supplier_id,reference_number,total_amount]); 
+        const purchaseRes=await client.query("INSERT INTO purchases(supplier_id,reference_no,total_amount,purchase_date)VALUES($1,$2,$3,NOW()) RETURNING *",[supplier_id,reference_no,total_amount]); 
 
         const purchase_id=purchaseRes.rows[0].id;
 
