@@ -6,6 +6,7 @@ import userRoutes from './src/routes/userRoutes.js';
 import supplierRoutes from './src/routes/supplierRoutes.js';
 import productRoutes from './src/routes/productRoutes.js';
 import purchaseRoutes from './src/routes/purchaseRoutes.js';
+import dashboardRoutes from './src/routes/dashboardRoutes.js';
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use('/api/suppliers', supplierRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/purchases', purchaseRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 
 
