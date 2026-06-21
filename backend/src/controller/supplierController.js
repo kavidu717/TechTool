@@ -1,6 +1,6 @@
 import pool from "../config/db.js";
 
-const addSupplier =async(req,res)=>{
+ export const addSupplier =async(req,res)=>{
     try{
 
         const {name,contact_number,address}=req.body;
@@ -24,7 +24,7 @@ const addSupplier =async(req,res)=>{
     try{
         const suppliers=await pool.query("SELECT * FROM suppliers ORDER BY id DESC");
         res.json(allSuppliers.rows);
-        
+
     }catch(error){
         console.error(err.message);
         res.status(500).json({ error: "Server error" });

@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import pool from './src/config/db.js';
 import userRoutes from './src/routes/userRoutes.js';
+import supplierRoutes from './src/routes/supplierRoutes.js';
 
 const app = express();
 
@@ -28,7 +29,7 @@ app.get('/api/test', async(req, res) => {
         json({error: error.message});
     }
 });
-
+app.use('/api/suppliers', supplierRoutes);
 
 app.use('/api/users', userRoutes);
 
