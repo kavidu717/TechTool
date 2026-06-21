@@ -28,10 +28,11 @@ export const getProducts=async(req,res)=>{
 
         const allProducts=await pool.query("SELECT * FROM products ORDER BY id DESC");
         res.json(allProducts.rows);
-        
+
 
     }catch(err){
         console.error(err.message);
         res.status(500).json({ error: "Server error" });
     }
 }
+

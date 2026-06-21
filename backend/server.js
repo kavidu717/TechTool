@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import pool from './src/config/db.js';
 import userRoutes from './src/routes/userRoutes.js';
 import supplierRoutes from './src/routes/supplierRoutes.js';
+import productRoutes from './src/routes/productRoutes.js';
 
 const app = express();
 
@@ -29,9 +30,11 @@ app.get('/api/test', async(req, res) => {
         json({error: error.message});
     }
 });
-app.use('/api/suppliers', supplierRoutes);
 
+
+app.use('/api/suppliers', supplierRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/products', productRoutes);
 
 
 
