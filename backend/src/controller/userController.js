@@ -10,7 +10,7 @@ const generateToken=(id,role)=>{
 
 // register the user
 
-export const regusterUser=async(req,res)=>{
+export const registerUser=async(req,res)=>{
     try{
 
         const {username,password}=req.body;

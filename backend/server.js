@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import pool from './src/config/db.js';
+import userRoutes from './src/routes/userRoutes.js';
 
 const app = express();
 
@@ -28,6 +29,8 @@ app.get('/api/test', async(req, res) => {
     }
 });
 
+
+app.use('/api/users', userRoutes);
 
 
 
