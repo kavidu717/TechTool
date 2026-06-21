@@ -22,10 +22,10 @@ import pool from "../config/db.js";
 
  export const getSuppliers=async(req,res)=>{
     try{
-        const suppliers=await pool.query("SELECT * FROM suppliers ORDER BY id DESC");
+        const allSuppliers=await pool.query("SELECT * FROM suppliers ORDER BY id DESC");
         res.json(allSuppliers.rows);
 
-    }catch(error){
+    }catch(err){
         console.error(err.message);
         res.status(500).json({ error: "Server error" });
     }

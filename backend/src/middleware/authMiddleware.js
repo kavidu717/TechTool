@@ -12,7 +12,7 @@ const protect=async(req,res,next)=>{
             token=req.headers.authorization.split(" ")[1];
             const decoded=jwt.verify(token,process.env.JWT_SECRET);
             
-            const userResult =await pool.query("SELECT id FROM users WHERE id=$1",[
+            const userResult =await pool.query("SELECT id,username,role FROM users WHERE id=$1",[
                 decoded.id
             ]);
 
@@ -31,6 +31,7 @@ const protect=async(req,res,next)=>{
 }
 
 const admin=(req,res,next)=>{
+    console.log(req.user);
 
     if(req.user && req.user.role==="ADMIN"){
         next();
