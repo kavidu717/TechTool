@@ -32,7 +32,7 @@ export default function Register() {
   return (
     <>
       <div className="flex h-screen w-full items-center justify-center bg-gray-100">
-        <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
+        <div className="w-full max-w-md  bg-white p-8 shadow-xl">
           <div className="mb-8 text-center">
             <h1 className="text-3xl font-bold text-gray-800">Add Cashier</h1>
             <p className="mt-2 text-sm text-gray-500">Create a new cashier account</p>

@@ -55,6 +55,7 @@ const Login = () => {
                 onChange={(e) => setUsername(e.target.value)}
                 className="w-full rounded-lg border py-2.5 pl-10 pr-4 focus:ring-2 focus:ring-blue-200"
                 required
+                placeholder="Enter your username"
               />
             </div>
           </div>
@@ -68,13 +69,14 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full rounded-lg border py-2.5 pl-10 pr-4 focus:ring-2 focus:ring-blue-200"
                 required
+                placeholder="Enter your password"
               />
             </div>
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700"
+            className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700"
           >
             {loading ? 'Logging in...' : 'Login'}
           </button>
