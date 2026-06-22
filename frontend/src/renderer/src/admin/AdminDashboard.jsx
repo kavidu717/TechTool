@@ -1,25 +1,60 @@
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import Sidebar from '../components/Sidebar'
+import DashboardOverview from '../admin/DashboardOverview'
+import ProductsManager from '../admin/ProductManager'
 
 const AdminDashboard = () => {
-  const navigate = useNavigate()
-  const user = JSON.parse(localStorage.getItem('user'))
+  const [activeTab, setActiveTab] = useState('Dashboard')
 
-  const handleLogout = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
-    navigate('/')
+  // Function to render the correct component based on the selected tab
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'Dashboard':
+        return <DashboardOverview />
+      case 'Products':
+        return <ProductsManager />
+      // Add other cases here as we build them
+      case 'POS Terminal':
+      case 'Suppliers':
+      case 'Sales':
+      case 'Users':
+      case 'Reports':
+      case 'Settings':
+      default:
+        return (
+          <div className="flex h-full flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 bg-white p-12 text-center shadow-sm">
+            <h3 className="text-2xl font-medium text-gray-600">{activeTab} Module</h3>
+            <p className="mt-2 max-w-md text-gray-400">
+              The user interface and functionalities for the {activeTab} section are currently under
+              development.
+            </p>
+          </div>
+        )
+    }
   }
 
   return (
-    <div className="flex h-screen flex-col items-center justify-center bg-blue-50">
-      <h1 className="text-4xl font-bold text-blue-800">Admin Dashboard</h1>
-      <p className="mt-4 text-lg text-gray-700">Welcome, {user?.username}!</p>
-      <button
-        onClick={handleLogout}
-        className="mt-8 rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600"
-      >
-        Logout
-      </button>
+    <div className="flex h-screen w-full bg-gray-100 font-sans">
+      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+
+      <div className="flex flex-1 flex-col overflow-hidden">
+        <header className="flex h-16 items-center justify-between bg-white px-8 shadow-sm z-10">
+          <h2 className="text-xl font-semibold text-gray-800">{activeTab}</h2>
+          <div className="text-sm text-gray-500">
+            {new Date().toLocaleDateString('en-US', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}
+          </div>
+        </header>
+
+        <main className="flex-1 overflow-y-auto bg-gray-50 p-8">
+          {/* Dynamically render the content here */}
+          {renderContent()}
+        </main>
+      </div>
     </div>
   )
 }
