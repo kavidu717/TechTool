@@ -82,3 +82,12 @@ ipcMain.handle('auth:login', async (event, credentials) => {
     return { success: false, message: error.response?.data?.message || 'Login failed from server' }
   }
 })
+
+ipcMain.handle('auth:register', async (event, data) => {
+  try {
+    const response = await axios.post('http://localhost:5000/api/users/register', data)
+    return { success: true, data: response.data }
+  } catch (error) {
+    return { success: false, message: error.response?.data?.message || 'Login failed from server' }
+  }
+})
