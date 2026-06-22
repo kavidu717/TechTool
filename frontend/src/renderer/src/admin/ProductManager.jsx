@@ -135,9 +135,9 @@ const ProductsManager = () => {
                         {product.barcode}
                       </td>
                       <td className="px-6 py-4 font-medium text-slate-800">{product.name}</td>
-                      
+
                       {/* Description Column with text truncation and tooltip */}
-                      <td 
+                      <td
                         className="px-6 py-4 text-slate-500 max-w-xs truncate cursor-help"
                         title={product.description}
                       >

@@ -7,7 +7,10 @@ const api = {
 
   register: (data) => ipcRenderer.invoke('auth:register', data),
 
-  getProducts: (token) => ipcRenderer.invoke('products:getAll', token)
+  getProducts: (token) => ipcRenderer.invoke('products:getAll', token),
+
+  getSuppliers: (token) => ipcRenderer.invoke('suppliers:getAll', token),
+  addSupplier: (data, token) => ipcRenderer.invoke('suppliers:add', data, token)
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to
