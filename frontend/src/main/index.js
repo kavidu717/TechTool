@@ -91,3 +91,21 @@ ipcMain.handle('auth:register', async (event, data) => {
     return { success: false, message: error.response?.data?.message || 'Login failed from server' }
   }
 })
+
+ipcMain.handle('products:getAll', async (event, token) => {
+  try {
+    const response = await axios.get('http://localhost:5000/api/products', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    return { success: true, data: response.data }
+  } catch (error) {
+    console.log(error.message, error.response?.status)
+    return {
+      success: false,
+
+      message: error.response?.data?.message || 'failed to fetch products'
+    }
+  }
+})

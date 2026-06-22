@@ -5,7 +5,9 @@ import { electronAPI } from '@electron-toolkit/preload'
 const api = {
   login: (credentials) => ipcRenderer.invoke('auth:login', credentials),
 
-  register: (data) => ipcRenderer.invoke('auth:register', data)
+  register: (data) => ipcRenderer.invoke('auth:register', data),
+
+  getProducts: (token) => ipcRenderer.invoke('products:getAll', token)
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to
