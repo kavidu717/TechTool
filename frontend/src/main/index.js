@@ -2,6 +2,7 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import axios from 'axios'
 
 function createWindow() {
   // Create the browser window.
@@ -72,3 +73,12 @@ app.on('window-all-closed', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+ipcMain.handle('auth:login', async (event, credentials) => {
+  try {
+    const response = await axios.post('http://localhost:5000/api/users/login', credentials)
+    return { success: true, data: response.data }
+  } catch (error) {
+    return { success: false, message: error.response?.data?.message || 'Login failed from server' }
+  }
+})

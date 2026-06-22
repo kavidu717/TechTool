@@ -1,28 +1,34 @@
 import { useState } from 'react'
 import { User, Lock } from 'lucide-react'
 import { useNavigate, Link } from 'react-router-dom'
-import api from '../utils/axios'
 
-const Register = () => {
+const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [role, setRole] = useState('admin')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
 
-  const handleRegister = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault()
     setError('')
     setLoading(true)
 
     try {
-      // Send registration details to backend
-      await api.post('/auth/register', { username, password, role })
-      navigate('/') // Redirect to login after success
+      const result = await window.api.login({ username, password })
+      if (result.success) {
+        const { token, user } = result.data
+        localStorage.setItem('token', token)
+        localStorage.setItem('user', JSON.stringify(user))
+
+        if (user.role === 'ADMIN') navigate('/admin-dashboard')
+        else navigate('/cashier-dashboard')
+      } else {
+        setError(result.message)
+      }
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed!')
+      setError(err.response?.data?.message)
     } finally {
       setLoading(false)
     }
@@ -30,15 +36,15 @@ const Register = () => {
 
   return (
     <div className="flex h-screen w-full items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
-        <h1 className="text-3xl font-bold text-gray-800 text-center mb-8">System Setup</h1>
+      <div className="w-full max-w-md bg-white p-8 shadow-xl">
+        <h1 className="text-3xl font-bold text-gray-800 text-center mb-8">TechTool POS</h1>
         {error && (
           <div className="mb-4 p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleRegister} className="space-y-6">
+        <form onSubmit={handleLogin} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Username</label>
             <div className="relative">
@@ -65,29 +71,18 @@ const Register = () => {
               />
             </div>
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">User Role</label>
-            <select
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-              className="w-full rounded-lg border py-2.5 px-4 bg-white"
-            >
-              <option value="admin">Admin</option>
-              <option value="cashier">Cashier</option>
-            </select>
-          </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700"
           >
-            {loading ? 'Creating...' : 'Register'}
+            {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
         <p className="mt-6 text-center text-sm text-gray-600">
-          Already have an account?{' '}
-          <Link to="/" className="text-blue-600 font-semibold">
-            Login
+          Need an account?{' '}
+          <Link to="/register" className="text-blue-600 font-semibold">
+            Register here
           </Link>
         </p>
       </div>
@@ -95,4 +90,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default Login
