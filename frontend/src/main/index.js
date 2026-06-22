@@ -109,3 +109,29 @@ ipcMain.handle('products:getAll', async (event, token) => {
     }
   }
 })
+
+// Fetch all suppliers
+ipcMain.handle('suppliers:getAll', async (event, token) => {
+  try {
+    const response = await axios.get('http://localhost:5000/api/suppliers', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    return { success: true, data: response.data }
+  } catch (error) {
+    console.log('SUPPLIER FETCH ERROR:', error.message)
+    return { success: false, message: 'Failed to fetch suppliers' }
+  }
+})
+
+// add the new supplier
+ipcMain.handle('suppliers:add', async (event, data, token) => {
+  try {
+    const response = await axios.post('http://localhost:5000/api/suppliers/add', data, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    return { success: true, data: response.data }
+  } catch (error) {
+    console.log('SUPPLIER ADD ERROR:', error.message)
+    return { success: false, message: 'Failed to add supplier' }
+  }
+})
