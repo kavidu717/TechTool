@@ -220,3 +220,16 @@ ipcMain.handle('get-sales', async (event, token) => {
     return { success: false, message: 'Failed to fetch sales', error }
   }
 })
+
+// report handlers
+ipcMain.handle('get-reports', async (event, params, token) => {
+  try {
+    const response = await axios.get(`http://localhost:5000/api/reports`, {
+      params: params,
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    return { success: true, data: response.data }
+  } catch (error) {
+    return { success: false, message: 'Failed to fetch reports', error }
+  }
+})
