@@ -189,3 +189,34 @@ ipcMain.handle('add-purchase', async (event, data, token) => {
     }
   }
 })
+
+// add new sale
+ipcMain.handle('add-sale', async (event, saleData, token) => {
+  try {
+    const response = await axios.post('http://localhost:5000/api/sales/add', saleData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    return { success: true, message: response.data.message }
+  } catch (error) {
+    console.error('Error adding sale:', error?.response?.data || error.message)
+    return {
+      success: false,
+      message: error?.response?.data?.error || 'Failed to save sale.'
+    }
+  }
+})
+
+//get all sale
+ipcMain.handle('get-sales', async (event, token) => {
+  try {
+    const response = await axios.get('http://localhost:5000/api/sales', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    return { success: true, data: response.data }
+  } catch (error) {
+    return { success: false, message: 'Failed to fetch sales', error }
+  }
+})

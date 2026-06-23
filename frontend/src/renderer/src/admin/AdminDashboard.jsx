@@ -6,6 +6,7 @@ import SuppliersManager from '../admin/SuppliersManager'
 import AddProducts from '../admin/AddProducts'
 import PurchasesManager from '../admin/PurchasesManager'
 import CreateGRN from './CreateGRN'
+import POSTerminal from './POSTerminal'
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('Dashboard')
@@ -28,6 +29,7 @@ const AdminDashboard = () => {
       case 'Suppliers':
         return <SuppliersManager />
       case 'POS Terminal':
+        return <POSTerminal />
       case 'Users':
       case 'Reports':
       case 'Settings':

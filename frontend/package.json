@@ -22,7 +22,8 @@
     "@electron-toolkit/utils": "^4.0.0",
     "axios": "^1.18.0",
     "lucide-react": "^1.21.0",
-    "react-router-dom": "^7.18.0"
+    "react-router-dom": "^7.18.0",
+    "react-to-print": "^3.3.0"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^2.1.0",
