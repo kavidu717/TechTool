@@ -4,6 +4,8 @@ import DashboardOverview from '../admin/DashboardOverview'
 import ProductsManager from '../admin/ProductManager'
 import SuppliersManager from '../admin/SuppliersManager'
 import AddProducts from '../admin/AddProducts'
+import PurchasesManager from '../admin/PurchasesManager'
+import CreateGRN from './CreateGRN'
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('Dashboard')
@@ -19,7 +21,10 @@ const AdminDashboard = () => {
       case 'AddProducts':
         return <AddProducts setActiveTab={setActiveTab} />
       // Add other cases here as we build them
-
+      case 'Purchases':
+        return <PurchasesManager setActiveTab={setActiveTab} />
+      case 'CreateGRN':
+        return <CreateGRN setActiveTab={setActiveTab} />
       case 'Suppliers':
         return <SuppliersManager />
       case 'POS Terminal':

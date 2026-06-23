@@ -13,7 +13,11 @@ const api = {
 
   addSupplier: (data, token) => ipcRenderer.invoke('suppliers:add', data, token),
 
-  addProduct: (data, token) => ipcRenderer.invoke('products:add', data, token)
+  addProduct: (data, token) => ipcRenderer.invoke('products:add', data, token),
+
+  addPurchase: (data, token) => ipcRenderer.invoke('add-purchase', data, token),
+
+  getPurchases: (token) => ipcRenderer.invoke('get-purchases', token)
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

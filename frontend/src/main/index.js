@@ -148,3 +148,44 @@ ipcMain.handle('products:add', async (event, data, token) => {
     return { success: false, message: 'Failed to add product' }
   }
 })
+
+// fetch all purchases
+ipcMain.handle('get-purchases', async (event, token) => {
+  try {
+    const response = await axios.get('http://localhost:5000/api/purchases', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    return { success: true, data: response.data }
+  } catch (error) {
+    console.log('PURCHASES FETCH ERROR:', error.message)
+    return { success: false, message: 'Failed to fetch purchases' }
+  }
+})
+
+// GRN
+ipcMain.handle('add-purchase', async (event, data, token) => {
+  try {
+    // Generate a reference number if one is not provided by the frontend
+    if (!data.reference_no) {
+      data.reference_no = `GRN-${Date.now()}`
+    }
+
+    const response = await axios.post('http://localhost:5000/api/purchases/add', data, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    return {
+      success: true,
+      message: response.data.message
+    }
+  } catch (error) {
+    console.error('Error adding purchase:', error?.response?.data || error.message)
+
+    return {
+      success: false,
+      message: error?.response?.data?.error || 'Failed to save GRN.'
+    }
+  }
+})

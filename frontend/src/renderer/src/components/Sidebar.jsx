@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 import {
   LayoutDashboard,
@@ -8,7 +9,8 @@ import {
   Users,
   LineChart,
   Settings,
-  LogOut
+  LogOut,
+  FileText
 } from 'lucide-react'
 
 // Accept activeTab and setActiveTab as props from the parent component
@@ -25,6 +27,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
     { name: 'Products', icon: <Package size={20} /> },
     { name: 'Suppliers', icon: <Truck size={20} /> },
     { name: 'Sales', icon: <Receipt size={20} /> },
+    { name: 'Purchases', icon: <FileText size={20} /> },
     { name: 'Users', icon: <Users size={20} /> },
     { name: 'Reports', icon: <LineChart size={20} /> },
     { name: 'Settings', icon: <Settings size={20} /> }
@@ -89,6 +92,11 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
       </div>
     </div>
   )
+}
+
+Sidebar.propTypes = {
+  activeTab: PropTypes.string.isRequired,
+  setActiveTab: PropTypes.func.isRequired
 }
 
 export default Sidebar
