@@ -8,6 +8,7 @@ import productRoutes from './src/routes/productRoutes.js';
 import purchaseRoutes from './src/routes/purchaseRoutes.js';
 import dashboardRoutes from './src/routes/dashboardRoutes.js';
 import saleRoutes from './src/routes/salesRoutes.js';
+import reportRoutes from './src/routes/reportRoutes.js';
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/purchases', purchaseRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/sales', saleRoutes);
+app.use('/api/reports', reportRoutes);
 
 
 app.listen(process.env.PORT, () => {
