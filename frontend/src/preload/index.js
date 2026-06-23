@@ -23,7 +23,9 @@ const api = {
 
   getSales: (token) => ipcRenderer.invoke('get-sales', token),
 
-  getReports: (params, token) => ipcRenderer.invoke('get-reports', params, token)
+  getReports: (params, token) => ipcRenderer.invoke('get-reports', params, token),
+
+  getDashboardStats: (token) => ipcRenderer.invoke('get-dashboard-stats', token)
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

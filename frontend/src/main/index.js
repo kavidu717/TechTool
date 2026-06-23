@@ -233,3 +233,14 @@ ipcMain.handle('get-reports', async (event, params, token) => {
     return { success: false, message: 'Failed to fetch reports', error }
   }
 })
+
+ipcMain.handle('get-dashboard-stats', async (event, token) => {
+  try {
+    const response = await axios.get('http://localhost:5000/api/dashboard', {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    return { success: true, data: response.data }
+  } catch (error) {
+    return { success: false, message: 'Failed to fetch dashboard stats', error }
+  }
+})
