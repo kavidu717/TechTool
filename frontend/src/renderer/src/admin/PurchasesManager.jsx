@@ -97,7 +97,7 @@ export default function PurchasesManager({ setActiveTab }) {
                     <td className="px-6 py-4 font-mono text-xs text-blue-600 bg-blue-50 rounded px-2 py-1 inline-block mt-3">
                       {purchase.reference_no}
                     </td>
-                    <td className="px-6 py-4 text-slate-600">Supplier #{purchase.supplier_id}</td>
+                    <td className="px-6 py-4 text-slate-600">{purchase.supplier_name}</td>
                     <td className="px-6 py-4 text-right font-bold text-slate-800">
                       {Number(purchase.total_amount).toLocaleString('en-US', {
                         minimumFractionDigits: 2

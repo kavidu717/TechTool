@@ -51,7 +51,14 @@ export const  addPurchase=async(req,res)=>{
  export const getPurchases=async(req,res)=>{
 
     try{
-        const allPurchases=await pool.query("SELECT * FROM purchases ORDER BY id DESC");
+       const query = `
+            SELECT p.*, s.name as supplier_name 
+            FROM purchases p 
+            LEFT JOIN suppliers s ON p.supplier_id = s.id 
+            ORDER BY p.id DESC
+        `;
+        
+        const allPurchases = await pool.query(query);
 
         res.json(allPurchases.rows);
     }catch(err){
