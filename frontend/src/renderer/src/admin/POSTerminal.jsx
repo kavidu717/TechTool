@@ -231,7 +231,7 @@ export default function POSTerminal() {
             className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-3 transition-all shadow-lg text-lg ${
               cart.length === 0
                 ? 'bg-gray-400 text-gray-200 cursor-not-allowed'
-                : 'bg-green-600 hover:bg-green-700 text-white active:scale-[0.99]'
+                : 'bg-blue-600 hover:bg-blue-700 text-white active:scale-[0.99]'
             }`}
           >
             <Printer size={24} /> Print & Save Bill
