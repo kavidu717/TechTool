@@ -1,20 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
+import PropTypes from 'prop-types'
 import { Plus, Loader2 } from 'lucide-react'
 
-const ProductsManager = () => {
+const ProductsManager = ({ setActiveTab }) => {
   const [activeCategory, setActiveCategory] = useState('All')
   const [categories, setCategories] = useState([])
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    fetchProductsFromDB()
-  }, [])
-
-  const fetchProductsFromDB = async () => {
+  const fetchProductsFromDB = useCallback(async () => {
     try {
-      setLoading(true)
-
       const token = localStorage.getItem('token')
       const result = await window.api.getProducts(token)
 
@@ -41,7 +36,11 @@ const ProductsManager = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
+
+  useEffect(() => {
+    fetchProductsFromDB()
+  }, [])
 
   const filteredProducts =
     activeCategory === 'All'
@@ -85,7 +84,10 @@ const ProductsManager = () => {
       </div>
 
       <div className="mb-8">
-        <button className="flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 shadow-sm">
+        <button
+          onClick={() => setActiveTab('AddProducts')}
+          className="flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-blue-700 shadow-sm"
+        >
           <Plus size={18} />
           Add New Product
         </button>
@@ -174,6 +176,10 @@ const ProductsManager = () => {
       )}
     </div>
   )
+}
+
+ProductsManager.propTypes = {
+  setActiveTab: PropTypes.func.isRequired
 }
 
 export default ProductsManager

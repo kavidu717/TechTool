@@ -3,6 +3,7 @@ import Sidebar from '../components/Sidebar'
 import DashboardOverview from '../admin/DashboardOverview'
 import ProductsManager from '../admin/ProductManager'
 import SuppliersManager from '../admin/SuppliersManager'
+import AddProducts from '../admin/AddProducts'
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('Dashboard')
@@ -13,12 +14,15 @@ const AdminDashboard = () => {
       case 'Dashboard':
         return <DashboardOverview />
       case 'Products':
-        return <ProductsManager />
+        return <ProductsManager setActiveTab={setActiveTab} />
+
+      case 'AddProducts':
+        return <AddProducts setActiveTab={setActiveTab} />
       // Add other cases here as we build them
-      case 'POS Terminal':
+
       case 'Suppliers':
         return <SuppliersManager />
-      case 'Sales':
+      case 'POS Terminal':
       case 'Users':
       case 'Reports':
       case 'Settings':
