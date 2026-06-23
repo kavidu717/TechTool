@@ -135,3 +135,16 @@ ipcMain.handle('suppliers:add', async (event, data, token) => {
     return { success: false, message: 'Failed to add supplier' }
   }
 })
+
+// add new products
+ipcMain.handle('products:add', async (event, data, token) => {
+  try {
+    const response = await axios.post('http://localhost:5000/api/products/add', data, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    return { success: true, data: response.data }
+  } catch (error) {
+    console.log('PRODUCT ADD ERROR:', error.message)
+    return { success: false, message: 'Failed to add product' }
+  }
+})
