@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Sidebar from '../components/Sidebar'
 import DashboardOverview from '../admin/DashboardOverview'
 import ProductsManager from '../admin/ProductManager'
+import SuppliersManager from '../admin/SuppliersManager'
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('Dashboard')
@@ -16,6 +17,7 @@ const AdminDashboard = () => {
       // Add other cases here as we build them
       case 'POS Terminal':
       case 'Suppliers':
+        return <SuppliersManager />
       case 'Sales':
       case 'Users':
       case 'Reports':
