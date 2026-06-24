@@ -234,13 +234,15 @@ ipcMain.handle('get-reports', async (event, params, token) => {
   }
 })
 
-ipcMain.handle('get-dashboard-stats', async (event, token) => {
+ipcMain.handle('get-dashboard-stats', async (event, token, date) => {
   try {
-    const response = await axios.get('http://localhost:5000/api/dashboard', {
+    // Append the filter as a query parameter in the URL
+    const url = `http://localhost:5000/api/dashboard?date=${date}`
+    const response = await axios.get(url, {
       headers: { Authorization: `Bearer ${token}` }
     })
     return { success: true, data: response.data }
   } catch (error) {
-    return { success: false, message: 'Failed to fetch dashboard stats', error }
+    return { success: false, error: error.message }
   }
 })
