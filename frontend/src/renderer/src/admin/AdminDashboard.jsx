@@ -8,6 +8,7 @@ import PurchasesManager from '../admin/PurchasesManager'
 import CreateGRN from './CreateGRN'
 import POSTerminal from './POSTerminal'
 import ReportsManager from './ReportManager'
+import ReturnProcess from './ReturnProcess'
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('Dashboard')
@@ -31,6 +32,9 @@ const AdminDashboard = () => {
         return <SuppliersManager />
       case 'POS Terminal':
         return <POSTerminal />
+
+        case 'Returns':
+        return <ReturnProcess />
       case 'Users':
       case 'Reports':
         return <ReportsManager />
