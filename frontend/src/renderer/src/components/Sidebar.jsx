@@ -10,7 +10,8 @@ import {
   LineChart,
   Settings,
   LogOut,
-  FileText
+  FileText,
+  Undo2
 } from 'lucide-react'
 
 // Accept activeTab and setActiveTab as props from the parent component
@@ -29,6 +30,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
     { name: 'Sales', icon: <Receipt size={20} /> },
     { name: 'Purchases', icon: <FileText size={20} /> },
     { name: 'Users', icon: <Users size={20} /> },
+    { name: 'Returns', icon: <Undo2 size={20} /> },
     { name: 'Reports', icon: <LineChart size={20} /> },
     { name: 'Settings', icon: <Settings size={20} /> }
   ]
