@@ -33,7 +33,7 @@ const AdminDashboard = () => {
       case 'POS Terminal':
         return <POSTerminal />
 
-        case 'Returns':
+      case 'Returns':
         return <ReturnProcess />
       case 'Users':
       case 'Reports':

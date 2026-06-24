@@ -246,3 +246,18 @@ ipcMain.handle('get-dashboard-stats', async (event, token, date) => {
     return { success: false, error: error.message }
   }
 })
+
+ipcMain.handle('get-sale-for-return', async (event, token, invoiceNo) => {
+  try {
+    const url = `http://localhost:5000/api/returns/invoice/${invoiceNo}`
+    const response = await axios.get(url, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    return response.data // Includes success flag from backend
+  } catch (error) {
+    return {
+      success: false,
+      message: error.response?.data?.message || 'Error connecting to server'
+    }
+  }
+})
