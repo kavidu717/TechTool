@@ -261,3 +261,18 @@ ipcMain.handle('get-sale-for-return', async (event, token, invoiceNo) => {
     }
   }
 })
+
+ipcMain.handle('get-all-users', async (event, token) => {
+  try {
+    const url = `http://localhost:5000/api/users`
+    const response = await axios.get(url, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    return response.data
+  } catch (error) {
+    return {
+      success: false,
+      message: error.response?.data?.message || 'Error fetching users from server'
+    }
+  }
+})

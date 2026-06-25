@@ -9,6 +9,7 @@ import CreateGRN from './CreateGRN'
 import POSTerminal from './POSTerminal'
 import ReportsManager from './ReportManager'
 import ReturnProcess from './ReturnProcess'
+import UserManagement from './UserManagement'
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('Dashboard')
@@ -36,6 +37,7 @@ const AdminDashboard = () => {
       case 'Returns':
         return <ReturnProcess />
       case 'Users':
+        return <UserManagement />
       case 'Reports':
         return <ReportsManager />
       case 'Settings':
