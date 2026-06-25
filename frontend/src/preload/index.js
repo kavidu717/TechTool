@@ -30,7 +30,9 @@ const api = {
   getSaleForReturn: (token, invoiceNo) =>
     ipcRenderer.invoke('get-sale-for-return', token, invoiceNo),
 
-  getAllUsers: (token) => ipcRenderer.invoke('get-all-users', token)
+  getAllUsers: (token) => ipcRenderer.invoke('get-all-users', token),
+
+  createUser: (token, userData) => ipcRenderer.invoke('create-user', token, userData)
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

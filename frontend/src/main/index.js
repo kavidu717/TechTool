@@ -276,3 +276,19 @@ ipcMain.handle('get-all-users', async (event, token) => {
     }
   }
 })
+
+// create the new user
+ipcMain.handle('create-user', async (event, token, userData) => {
+  try {
+    const url = `http://localhost:5000/api/users`
+    const response = await axios.post(url, userData, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    return response.data
+  } catch (error) {
+    return {
+      success: false,
+      message: error.response?.data?.message || 'Error creating user'
+    }
+  }
+})

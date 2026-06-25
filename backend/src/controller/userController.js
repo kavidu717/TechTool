@@ -131,7 +131,7 @@ export const addUser= async(req,res)=>{
         const salt=await bcrypt.genSalt(10);
         const hashedPassword=await bcrypt.hash(password,salt);
 
-        const newUser=await pool.query("INSERT INTO users(username,password,role) VALUES($1,$2,$3) RETURNING *",[
+        const newUser=await pool.query("INSERT INTO users(username,password_hash,role) VALUES($1,$2,$3) RETURNING *",[
             username,
             hashedPassword,
             role
