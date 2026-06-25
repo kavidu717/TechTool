@@ -92,3 +92,18 @@ export const loginUser=async(req,res)=>{
     }
 }
 
+export const getUsers=async(req,res)=>{
+    try{
+
+        const allUsers=await pool.query("SELECT id,username,role,created_at FROM users ORDER BY id ASC");
+        res.json({
+            success:true,
+            data:allUsers.rows
+        })
+
+    }catch(err){
+        console.error(err.message);
+        res.status(500).json({ error: "Server error" });
+    }
+}
+
