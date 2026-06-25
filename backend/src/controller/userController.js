@@ -107,3 +107,43 @@ export const getUsers=async(req,res)=>{
     }
 }
 
+export const addUser= async(req,res)=>{
+    try{
+
+        const {username,password,role}=req.body;
+         
+        // check all fields are fill or not
+        if(!username || !password || !role){
+         return res.status(400).json({error:"all fields are required"});
+        }
+        
+
+        // find username are exists
+        const existUser=await pool.query("SELECT * FROM users WHERE username=$1",[
+            username
+        ]);
+
+        if(existUser.rows.length>0){
+            return res.status(400).json({error:"user already exist"});
+        }
+        
+        //hash the password
+        const salt=await bcrypt.genSalt(10);
+        const hashedPassword=await bcrypt.hash(password,salt);
+
+        const newUser=await pool.query("INSERT INTO users(username,password,role) VALUES($1,$2,$3) RETURNING *",[
+            username,
+            hashedPassword,
+            role
+        ]);
+
+        res.status(201).json({
+            message:"user added successfully",
+            data:newUser.rows[0],
+        });
+    }catch(err){
+        console.error(err.message);
+        res.status(500).json({ error: "Server error" });
+    }
+}
+
