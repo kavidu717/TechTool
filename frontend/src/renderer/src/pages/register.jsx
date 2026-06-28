@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { User, Lock } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import bgImage from '../assets/wallpaper.jpg'
 
 export default function Register() {
   const [username, setUsername] = useState('')
@@ -31,15 +32,21 @@ export default function Register() {
   }
   return (
     <>
-      <div className="flex h-screen w-full items-center justify-center bg-gray-100">
-        <div className="w-full max-w-md  bg-white p-8 shadow-xl">
+      <div className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-gray-100">
+        <img
+          src={bgImage}
+          alt="Background"
+          className="absolute inset-0 z-0 h-full w-full object-cover"
+        />
+
+        <div className="relative z-10 w-full max-w-md rounded-lg bg-white p-8 shadow-xl">
           <div className="mb-8 text-center">
-            <h1 className="text-3xl font-bold text-gray-800">Add Cashier</h1>
+            <h1 className="text-3xl font-bold text-gray-800">Sign Up </h1>
             <p className="mt-2 text-sm text-gray-500">Create a new cashier account</p>
           </div>
 
           {error && (
-            <div className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-600 border border-red-200">
+            <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-600">
               {error}
             </div>
           )}
@@ -55,7 +62,7 @@ export default function Register() {
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="w-full rounded-lg border border-gray-300 py-2.5 pl-10 pr-4 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                  className="w-full  border border-gray-300 py-2.5 pl-10 pr-4 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
                   placeholder="Enter username"
                   required
                   disabled={loading}
@@ -73,7 +80,7 @@ export default function Register() {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full rounded-lg border border-gray-300 py-2.5 pl-10 pr-4 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                  className="w-full  border border-gray-300 py-2.5 pl-10 pr-4 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
                   placeholder="Enter password"
                   required
                   disabled={loading}
@@ -84,8 +91,8 @@ export default function Register() {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full rounded-lg px-4 py-3 font-semibold text-white transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-                loading ? 'bg-blue-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700'
+              className={`w-full  px-4 py-3 font-semibold text-white transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                loading ? 'cursor-not-allowed bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'
               }`}
             >
               {loading ? 'Creating Account...' : 'Register'}
